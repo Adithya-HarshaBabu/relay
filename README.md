@@ -16,7 +16,7 @@ changes addresses and escalates to humans, using Gemini function calling.
   the agent resumes exactly where it stopped (the paused call plus any later calls from the same step).
 - **Guardrails in code, not just the prompt:** tools verify the customer owns the order, enforce the
   30-day window, cap refunds at what's left on the order and require approval above $100. In testing,
-  a prompt injection got the model to *attempt* a $500 refund; the tool refused it.
+  a prompt injection got the model to *attempt* a refund it had no business issuing; the tool refused it.
 - **Evals:** 13 scenarios (happy paths, policy limits, approvals, safety) run against each model and
   graded by deterministic code checks on what the agent did and said. Results are on the Evals page.
 
