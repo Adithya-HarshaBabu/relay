@@ -26,7 +26,8 @@ function parse(raw: string): TurnRequest | string {
   } catch {
     return 'Bad request.'
   }
-  if (!Array.isArray(body.history) || body.history.length > MAX_HISTORY) return 'This conversation is too long for the demo. Start a new one.'
+  if (!Array.isArray(body.history)) return 'Bad request.'
+  if (body.history.length > MAX_HISTORY) return 'This conversation is too long for the demo. Start a new one.'
   if (!body.store || !Array.isArray(body.store.orders) || !Array.isArray(body.store.customers) || typeof body.store.today !== 'string') return 'Bad request.'
   const message = typeof body.message === 'string' ? body.message.trim() : ''
   if (!body.pending && !message) return 'Type a message first.'

@@ -1,5 +1,7 @@
 # Relay
 
+**Live demo: [relay-3fn4.vercel.app](https://relay-3fn4.vercel.app)**
+
 **An AI support agent that takes real actions through tools, pauses for a human on big refunds,
 shows every step it takes, and is graded by an automated eval suite.**
 
