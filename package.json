@@ -1,0 +1,27 @@
+{
+  "name": "relay",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "eval": "vite build --ssr scripts/eval.ts --outDir .eval-build --emptyOutDir --logLevel warn && node .eval-build/eval.js"
+  },
+  "dependencies": {
+    "@google/genai": "^2.32.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "oxlint": "^1.90.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  }
+}
