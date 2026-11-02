@@ -156,12 +156,13 @@ async function generate(ai: GoogleGenAI, history: History, store: Store, opts: L
         const message = String(error)
         // Bad key: no retry or other model will help.
         if (/API key|PERMISSION_DENIED|\b40[03]\b/i.test(message)) throw error
-        const temporary = /\b(429|503)\b|RESOURCE_EXHAUSTED|UNAVAILABLE|high demand/i.test(message)
-        if (!opts.patient || !temporary) {
+        const temporary = /\b(429|503)\b|RESOURCE_EXHAUSTED|UNAVAILABLE|high demand|AbortError|aborted|timed? ?out/i.test(message)
+        const delay = Number(message.match(/"retryDelay":"(\d+)/)?.[1] ?? 10)
+        // Per-minute limits clear in seconds; a daily quota asks for hours, so don't wait on it.
+        if (!opts.patient || !temporary || delay > 90) {
           console.error(`[relay] ${model} failed:`, message.slice(0, 300))
           break
         }
-        const delay = Number(message.match(/"retryDelay":"(\d+)/)?.[1] ?? 10)
         await new Promise((r) => setTimeout(r, (delay + 1) * 1000))
       }
     }
